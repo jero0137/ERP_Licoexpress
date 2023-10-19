@@ -154,19 +154,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {}
+    "C:\\Users\\jero1\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\OneDrive - UPB\\Documentos\\SEMESTRE VI\\SISTEMAS EMPRESARIALES\\ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\ERP_LicoExpress_API.csproj",
+      "projectUniqueName": "D:\\Archivos uni\\6to semestre\\SIstemas empresariales\\BackEnd_ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\ERP_LicoExpress_API.csproj",
       "projectName": "ERP_LicoExpress_API",
-      "projectPath": "C:\\Users\\User\\OneDrive - UPB\\Documentos\\SEMESTRE VI\\SISTEMAS EMPRESARIALES\\ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\ERP_LicoExpress_API.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\OneDrive - UPB\\Documentos\\SEMESTRE VI\\SISTEMAS EMPRESARIALES\\ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\obj\\",
+      "projectPath": "D:\\Archivos uni\\6to semestre\\SIstemas empresariales\\BackEnd_ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\ERP_LicoExpress_API.csproj",
+      "packagesPath": "C:\\Users\\jero1\\.nuget\\packages\\",
+      "outputPath": "D:\\Archivos uni\\6to semestre\\SIstemas empresariales\\BackEnd_ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jero1\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
