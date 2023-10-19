@@ -7,5 +7,7 @@ namespace ERP_LicoExpress_API.Interfaces
     {
 
         public Task<IEnumerable<Supplier>> GetAllAsync();
+        public Task<Supplier> GetByIdAsync(int id);
+        public Task<bool> DeleteAsync(Supplier unSupplier);
     }
 }
