@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Archivos uni\\6to semestre\\SIstemas empresariales\\BackEnd_ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\ERP_LicoExpress_API.csproj": {}
+    "C:\\Users\\User\\OneDrive - UPB\\Documentos\\SEMESTRE VI\\SISTEMAS EMPRESARIALES\\ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\ERP_LicoExpress_API.csproj": {}
   },
   "projects": {
-    "D:\\Archivos uni\\6to semestre\\SIstemas empresariales\\BackEnd_ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\ERP_LicoExpress_API.csproj": {
+    "C:\\Users\\User\\OneDrive - UPB\\Documentos\\SEMESTRE VI\\SISTEMAS EMPRESARIALES\\ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\ERP_LicoExpress_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Archivos uni\\6to semestre\\SIstemas empresariales\\BackEnd_ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\ERP_LicoExpress_API.csproj",
+        "projectUniqueName": "C:\\Users\\User\\OneDrive - UPB\\Documentos\\SEMESTRE VI\\SISTEMAS EMPRESARIALES\\ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\ERP_LicoExpress_API.csproj",
         "projectName": "ERP_LicoExpress_API",
-        "projectPath": "D:\\Archivos uni\\6to semestre\\SIstemas empresariales\\BackEnd_ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\ERP_LicoExpress_API.csproj",
-        "packagesPath": "C:\\Users\\jero1\\.nuget\\packages\\",
-        "outputPath": "D:\\Archivos uni\\6to semestre\\SIstemas empresariales\\BackEnd_ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\obj\\",
+        "projectPath": "C:\\Users\\User\\OneDrive - UPB\\Documentos\\SEMESTRE VI\\SISTEMAS EMPRESARIALES\\ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\ERP_LicoExpress_API.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\OneDrive - UPB\\Documentos\\SEMESTRE VI\\SISTEMAS EMPRESARIALES\\ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\jero1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,6 +39,16 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.1.11, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[7.0.6, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

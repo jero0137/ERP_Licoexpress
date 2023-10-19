@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "9jhtanYIMo+mO5/9pcSBzSPRXGJRGgKoo9UU93Xab02FhpbqWNpzj9SfXVed6LfiPscVOYnM7ZmGdD8/2kZ9gQ==",
+  "dgSpecHash": "44a/MBL4ziHuTYO2Up3yyJF0917w1rFdpkKsurrRf37v9AitydEwoWfReIBnkYNPdBrDOat/oUh/Ctd0lZ1hbQ==",
   "success": true,
-  "projectFilePath": "D:\\Archivos uni\\6to semestre\\SIstemas empresariales\\BackEnd_ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\ERP_LicoExpress_API.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\User\\OneDrive - UPB\\Documentos\\SEMESTRE VI\\SISTEMAS EMPRESARIALES\\ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\ERP_LicoExpress_API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\User\\.nuget\\packages\\dapper\\2.1.11\\dapper.2.1.11.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\npgsql\\7.0.6\\npgsql.7.0.6.nupkg.sha512"
+  ],
   "logs": []
 }
