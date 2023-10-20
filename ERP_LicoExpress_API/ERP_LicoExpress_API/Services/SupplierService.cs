@@ -53,6 +53,42 @@ namespace ERP_LicoExpress_API.Services
                 throw error;
             }
         }
+
+
+        public async Task<Supplier> CreateAsync(Supplier unSupplier)
+        {
+            if (unSupplier.Nombre.Length == 0)
+                throw new AppValidationException("No se puede insertar un proveedor sin un nombre");
+
+            if (unSupplier.Correo.Length == 0)
+                throw new AppValidationException("No se puede insertar un proveedor sin un correo");
+
+            if (unSupplier.Numero_contacto.Length == 0)
+                throw new AppValidationException("No se puede insertar un proveedor sin un número de contacto");
+
+
+            var supplierExistente = await _supplierRepository
+                .GetByIdAsync(unSupplier.Id!);
+
+            try
+            {
+                bool resultadoAccion = await _supplierRepository.CreateAsync(unSupplier);
+
+                if (!resultadoAccion)
+                    throw new AppValidationException("Operación ejecutada pero no generó cambios en la DB");
+
+                supplierExistente = await _supplierRepository.GetByIdAsync(unSupplier.Id);
+                //throw new AppValidationException("Inserción correcta");
+
+            }
+            catch (DbOperationException error)
+            {
+                throw error;
+            }
+
+            return (supplierExistente);
+
+        }
     }
 
 }

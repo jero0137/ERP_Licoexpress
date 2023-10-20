@@ -1,4 +1,5 @@
-﻿using ERP_LicoExpress_API.Services;
+﻿using ERP_LicoExpress_API.Models;
+using ERP_LicoExpress_API.Services;
 using GestionTransporte_CS_API_PostgresSQL.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
@@ -65,6 +66,25 @@ namespace ERP_LicoExpress_API.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> CreateAsync(Supplier unSupplier)
+        {
+            try
+            {
+                var supplierCreado = await _supplierService
+                    .CreateAsync(unSupplier);
+
+                return Ok(supplierCreado);
+            }
+            catch (AppValidationException error)
+            {
+                return BadRequest($"Error de validación: {error.Message}");
+            }
+            catch (DbOperationException error)
+            {
+                return BadRequest($"Error de operacion en DB: {error.Message}");
+            }
+        }
 
     }
 }
