@@ -60,7 +60,7 @@ namespace ERP_LicoExpress_API.Repositories
 
             string sentenciaSQL = "SELECT id, correo, contrasena " +
                 "FROM usuarios " +
-                "WHERE corrreo = @correo";
+                "WHERE correo = @correo";
 
             var resultado = await conexion.QueryAsync<User>(sentenciaSQL,
                                 parametrosSentencia);
@@ -98,6 +98,36 @@ namespace ERP_LicoExpress_API.Repositories
             }
 
             return user;
+        }
+
+        public async Task<bool> CreateSessionAsync(Session sesion)
+        {
+            bool resultadoAccion = false;
+
+            try
+            {
+                var conexion = contextoDB.CreateConnection();
+
+                string procedimiento = "core.p_inserta_sesion";
+                var parametros = new
+                {
+                    p_token = sesion.Token
+                }; 
+
+                var cantidad_filas = await conexion.ExecuteAsync(
+                    procedimiento,
+                    parametros,
+                    commandType: CommandType.StoredProcedure);
+
+                if (cantidad_filas != 0)
+                    resultadoAccion = true;
+            }
+            catch (NpgsqlException error)
+            {
+                throw new DbOperationException(error.Message);
+            }
+
+            return resultadoAccion;
         }
     }
 }
