@@ -39,3 +39,14 @@ begin
    	where p.id=p_id;
 end;
 $$;
+
+-- Inserciones
+create or replace procedure p_inserta_supplier(in p_nombre varchar, in p_correo varchar, in p_numero_contacto varchar)
+language plpgsql    
+as $$
+begin
+    insert into proveedores(nombre, correo,numero_contacto)
+    values (p_nombre, p_correo, p_numero_contacto);
+end;
+$$;
+
