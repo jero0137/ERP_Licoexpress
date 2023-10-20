@@ -100,6 +100,7 @@ namespace ERP_LicoExpress_API.Repositories
             return user;
         }
 
+        //Funcion de repositorio para crear una sesion una vez se haga login
         public async Task<bool> CreateSessionAsync(Session sesion)
         {
             bool resultadoAccion = false;

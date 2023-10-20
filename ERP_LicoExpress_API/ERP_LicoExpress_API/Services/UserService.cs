@@ -24,16 +24,20 @@ namespace ERP_LicoExpress_API.Services
             return user;
         }
 
+        //Funcion de servicio para hacer validaciones para el login
         public async Task<string> LoginAsync(User user)
         {
             var userExistente = await _userRepository.GetByCorreo(user.Correo);
-
+            //Validamos que el user exista
             if(userExistente.Id == 0)
                 throw new AppValidationException($"Usuario no encontrado");
-
+            //Validamos que la contraseña falta
+            //Hay que cifrar la contraseña proximamente
             if(userExistente.Contrasena != user.Contrasena)
                 throw new AppValidationException($"La constraseña del usuario no coincide");
 
+            //LLenamos los datos de la session
+            //Por ahora el token es el hashcode de la clase
             Session session = new Session();
 
             session.Token = $"{userExistente.GetHashCode()}";
