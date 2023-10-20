@@ -25,11 +25,11 @@ namespace ERP_LicoExpress_API.Services
         }
 
         //Funcion de servicio para hacer validaciones para el login
-        public async Task<string> LoginAsync(User user)
+        public async Task<Session> LoginAsync(User user)
         {
             var userExistente = await _userRepository.GetByCorreo(user.Correo);
             //Validamos que el user exista
-            if(userExistente.Id == 0)
+            if(userExistente.Id     == 0)
                 throw new AppValidationException($"Usuario no encontrado");
             //Validamos que la contraseña falta
             //Hay que cifrar la contraseña proximamente
@@ -56,7 +56,7 @@ namespace ERP_LicoExpress_API.Services
                 throw error;
             }
 
-            return session.Token;
+            return session;
         }
 
 
