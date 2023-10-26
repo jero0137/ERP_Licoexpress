@@ -57,14 +57,26 @@ namespace ERP_LicoExpress_API.Services
 
         public async Task<Supplier> CreateAsync(Supplier unSupplier)
         {
-            if (unSupplier.Nombre.Length == 0)
+            if (unSupplier.Nombre_empresa.Length == 0)
                 throw new AppValidationException("No se puede insertar un proveedor sin un nombre");
+
+            if (unSupplier.Responsable.Length == 0)
+                throw new AppValidationException("No se puede insertar un proveedor sin un responsable");
 
             if (unSupplier.Correo.Length == 0)
                 throw new AppValidationException("No se puede insertar un proveedor sin un correo");
 
+            if (unSupplier.Numero_registro == 0)
+                throw new AppValidationException("No se puede insertar un proveedor sin un número de registro");
+
             if (unSupplier.Numero_contacto.Length == 0)
                 throw new AppValidationException("No se puede insertar un proveedor sin un número de contacto");
+
+            if (unSupplier.Direccion_empresa.Length == 0)
+                throw new AppValidationException("No se puede insertar un proveedor sin una dirección");
+
+            if (unSupplier.Ciudad.Length == 0)
+                throw new AppValidationException("No se puede insertar un proveedor sin una ciudad");
 
 
             var supplierExistente = await _supplierRepository

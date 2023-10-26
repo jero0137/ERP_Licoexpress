@@ -23,7 +23,7 @@ namespace ERP_LicoExpress_API.Repositories
         {
             var conexion = contextoDB.CreateConnection();
 
-            string sentenciaSQL = "SELECT id, nombre, numero_contacto, correo " +
+            string sentenciaSQL = "SELECT id, nombre_empresa, responsable, correo, numero_registro, numero_contacto, direccion_empresa, ciudad  " +
                         "FROM proveedores " +
                         "ORDER BY id DESC";
 
@@ -44,9 +44,9 @@ namespace ERP_LicoExpress_API.Repositories
             parametrosSentencia.Add("@supplier_id", id,
                                     DbType.Int32, ParameterDirection.Input);
 
-            string sentenciaSQL = "SELECT id, nombre, numero_contacto, correo " +
-                                  "FROM proveedores " +
-                                  "WHERE id = @supplier_id ";
+            string sentenciaSQL = "SELECT id, nombre_empresa, responsable, correo, numero_registro, numero_contacto, direccion_empresa, ciudad  " +
+                        "FROM proveedores " +
+                        "WHERE id=@supplier_id";
 
             var resultado = await conexion.QueryAsync<Supplier>(sentenciaSQL,
                                 parametrosSentencia);
@@ -100,9 +100,13 @@ namespace ERP_LicoExpress_API.Repositories
                 string procedimiento = "p_inserta_supplier";
                 var parametros = new
                 {
-                    p_nombre = unSupplier.Nombre,
+                    p_nombre_empresa = unSupplier.Nombre_empresa,
+                    p_responsable = unSupplier.Responsable,
                     p_correo = unSupplier.Correo,
+                    p_numero_registro = unSupplier.Numero_registro,
                     p_numero_contacto = unSupplier.Numero_contacto,
+                    p_direccion_empresa = unSupplier.Direccion_empresa,
+                    p_ciudad = unSupplier.Ciudad,
                 };
 
                 var cantidad_filas = await conexion.ExecuteAsync(

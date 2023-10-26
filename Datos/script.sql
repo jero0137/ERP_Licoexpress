@@ -11,14 +11,17 @@ create table sesiones(
 	fecha_fin date
 );
 
-create table proveedores(
-	id int NOT NULL GENERATED ALWAYS AS IDENTITY,
-	nombre varchar(30) NOT NULL,
-	numero_contacto varchar(11) not null,
-	correo varchar(20) not null,
-	CONSTRAINT usuarios_pk PRIMARY KEY (id)	
-);
 
+create table public.proveedores (
+	id int4 not null generated always as identity,
+	nombre_empresa varchar not null,
+	responsable varchar not null,
+	correo varchar not null,
+	numero_registro int not null,
+	numero_contacto varchar not null,
+	direccion_empresa varchar not null,
+	ciudad varchar not null
+);
 
 create or replace procedure core.p_inserta_sesion(
                     in p_token varchar)
@@ -40,13 +43,17 @@ begin
 end;
 $$;
 
--- Inserciones
-create or replace procedure p_inserta_supplier(in p_nombre varchar, in p_correo varchar, in p_numero_contacto varchar)
+
+create or replace procedure p_inserta_supplier(in p_nombre_empresa varchar, in p_responsable varchar,
+in p_correo varchar, in p_numero_registro int, in p_numero_contacto varchar, in p_direccion_empresa varchar,
+in p_ciudad varchar)
 language plpgsql    
 as $$
 begin
-    insert into proveedores(nombre, correo,numero_contacto)
-    values (p_nombre, p_correo, p_numero_contacto);
+    insert into proveedores(nombre_empresa, responsable, correo, numero_registro, numero_contacto, direccion_empresa,
+    ciudad)
+    values (p_nombre_empresa, p_responsable, p_correo, p_numero_registro, p_numero_contacto,
+    p_direccion_empresa, p_ciudad);
 end;
 $$;
 
