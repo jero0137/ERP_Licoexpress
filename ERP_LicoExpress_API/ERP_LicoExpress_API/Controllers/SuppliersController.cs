@@ -16,7 +16,7 @@ namespace ERP_LicoExpress_API.Controllers
         {
             _supplierService = supplierService;
         }
-        [Authorize]
+        
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {

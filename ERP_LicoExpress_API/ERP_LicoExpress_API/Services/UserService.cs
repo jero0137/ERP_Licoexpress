@@ -64,7 +64,7 @@ namespace ERP_LicoExpress_API.Services
 
             return session;
         }
-
+        /*
         public async Task<User> Authenticate(User user)
         {
             // Buscar al usuario por su nombre de usuario en el repositorio
@@ -107,5 +107,6 @@ namespace ERP_LicoExpress_API.Services
                 return Convert.ToBase64String(keyBytes);
             }
         }
+        */
     }
 }

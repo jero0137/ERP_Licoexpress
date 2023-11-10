@@ -9,6 +9,7 @@ namespace ERP_LicoExpress_API.Controllers
     [ApiController]
     public class AuthController : Controller
     {
+        /*
         private readonly UserService _userService;
         public AuthController(UserService userService)
         {
@@ -29,5 +30,6 @@ namespace ERP_LicoExpress_API.Controllers
 
             return Ok(new { token });
         }
+        */
     }
 }
