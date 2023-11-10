@@ -1,6 +1,12 @@
 ﻿using ERP_LicoExpress_API.Interfaces;
 using ERP_LicoExpress_API.Models;
+using ERP_LicoExpress_API.Repositories;
 using GestionTransporte_CS_API_PostgresSQL.Helpers;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace ERP_LicoExpress_API.Services
 {
@@ -59,6 +65,47 @@ namespace ERP_LicoExpress_API.Services
             return session;
         }
 
+        public async Task<User> Authenticate(User user)
+        {
+            // Buscar al usuario por su nombre de usuario en el repositorio
+            var userExistente = await _userRepository.GetByCorreo(user.Correo);
 
+            // Verificar si el usuario existe y si la contraseña es válida
+            if (userExistente.Id == 0)
+                throw new AppValidationException($"Usuario no encontrado");
+            if(userExistente.Contrasena != user.Contrasena)
+                throw new AppValidationException($"Las constraseñas no coinciden");
+            // Las credenciales son incorrectas
+            return userExistente;
+        }
+
+        public string GenerateToken(User user)
+        {
+            var secretKey = GenerateKey(32);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(secretKey); // Reemplaza por tu clave secreta
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, user.Correo),
+                    new Claim(ClaimTypes.Role, user.Rol) // Agregar rol como claim
+                    // Puedes incluir más claims según las necesidades (identificador de usuario, etc.)
+                }),
+                Expires = DateTime.UtcNow.AddHours(1), // Configura la expiración del token
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
+        public static string GenerateKey(int keySizeInBytes)
+        {
+            using (var generator = RandomNumberGenerator.Create())
+            {
+                var keyBytes = new byte[keySizeInBytes];
+                generator.GetBytes(keyBytes);
+                return Convert.ToBase64String(keyBytes);
+            }
+        }
     }
 }

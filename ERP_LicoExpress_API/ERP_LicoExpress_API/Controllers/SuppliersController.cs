@@ -1,6 +1,7 @@
 ﻿using ERP_LicoExpress_API.Models;
 using ERP_LicoExpress_API.Services;
 using GestionTransporte_CS_API_PostgresSQL.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ERP_LicoExpress_API.Controllers
@@ -15,7 +16,7 @@ namespace ERP_LicoExpress_API.Controllers
         {
             _supplierService = supplierService;
         }
-
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {

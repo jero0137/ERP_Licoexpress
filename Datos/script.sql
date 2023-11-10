@@ -12,7 +12,7 @@ create table sesiones(
 );
 
 
-create table public.proveedores (
+create table proveedores (
 	id int4 not null generated always as identity,
 	nombre_empresa varchar not null,
 	responsable varchar not null,
@@ -23,7 +23,7 @@ create table public.proveedores (
 	ciudad varchar not null
 );
 
-create or replace procedure core.p_inserta_sesion(
+create or replace procedure p_inserta_sesion(
                     in p_token varchar)
     language plpgsql
 as

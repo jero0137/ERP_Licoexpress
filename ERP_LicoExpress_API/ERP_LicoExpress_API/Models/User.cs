@@ -5,8 +5,9 @@ namespace ERP_LicoExpress_API.Models
     public class User
     {
         public int Id { get; set; } = 0;
-        public string Correo { get; set; } = String.Empty;
-        public string Contrasena { get; set; } = String.Empty;
+        public string Correo { get; set; } = string.Empty;
+        public string Contrasena { get; set; } = string.Empty;
+        public string Rol { get; set; } = string.Empty;
 
         public override int GetHashCode()
         {
