@@ -99,11 +99,6 @@ namespace ERP_LicoExpress_API.Services
             }
 
 
-            /*var locationExistente = await _locationRepository
-                    .GetByIdAsync(unaLocation.Id);
-
-            return (locationExistente);*/
-
         }
 
     }
