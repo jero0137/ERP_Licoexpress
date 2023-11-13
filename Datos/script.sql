@@ -23,6 +23,16 @@ create table proveedores (
 	ciudad varchar not null
 );
 
+create table sedes (
+	id int4 not null generated always as identity,
+	nombre varchar not null,
+	direccion varchar not null,
+	nombre_admin varchar not null,
+	contacto_admin varchar not null,
+	telefono_admin varchar not null,
+	ciudad varchar not null
+);
+
 create or replace procedure p_inserta_sesion(
                     in p_token varchar)
     language plpgsql
@@ -54,6 +64,27 @@ begin
     ciudad)
     values (p_nombre_empresa, p_responsable, p_correo, p_numero_registro, p_numero_contacto,
     p_direccion_empresa, p_ciudad);
+end;
+$$;
+
+
+create or replace procedure p_inserta_location(in p_nombre varchar, in p_direccion varchar,
+in p_nombre_admin varchar, in p_contacto_admin varchar, in p_telefono_admin varchar, in p_ciudad varchar)
+language plpgsql    
+as $$
+begin
+    insert into sedes(nombre, direccion, nombre_admin, contacto_admin, telefono_admin, ciudad)
+    values (p_nombre, p_direccion, p_nombre_admin, p_contacto_admin, p_telefono_admin, p_ciudad);
+end;
+$$;
+
+
+create or replace procedure p_elimina_location(in p_id integer)
+language plpgsql 
+as $$
+begin
+    delete from sedes s
+   	where s.id=p_id;
 end;
 $$;
 

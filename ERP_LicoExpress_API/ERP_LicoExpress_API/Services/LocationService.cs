@@ -57,10 +57,10 @@ namespace ERP_LicoExpress_API.Services
 
         public async Task<Location> CreateAsync(Location unaLocation)
         {
-            var locationExistente = await _locationRepository.GetByNameAsync(unaLocation.Nombre);
+            //var locationExistente = await _locationRepository.GetByNameAsync(unaLocation.Nombre);
 
-            if (locationExistente.Nombre.Equals(unaLocation.Nombre))
-                throw new AppValidationException($"Ya existe una sede con el nombre {unaLocation.Nombre} ");
+            //if (locationExistente.Nombre.Equals(unaLocation.Nombre))
+              //  throw new AppValidationException($"Ya existe una sede con el nombre {unaLocation.Nombre} ");
 
 
             if (unaLocation.Nombre.Length == 0)
@@ -88,6 +88,9 @@ namespace ERP_LicoExpress_API.Services
                 if (!resultadoAccion)
                     throw new AppValidationException("Operación ejecutada pero no generó cambios en la DB");
 
+                var locationExistente = await _locationRepository.GetByIdAsync(unaLocation.Id);
+
+                return locationExistente;
 
             }
             catch (DbOperationException error)
@@ -96,10 +99,10 @@ namespace ERP_LicoExpress_API.Services
             }
 
 
-            var locationCreada = await _locationRepository
+            /*var locationExistente = await _locationRepository
                     .GetByIdAsync(unaLocation.Id);
 
-            return (locationCreada);
+            return (locationExistente);*/
 
         }
 

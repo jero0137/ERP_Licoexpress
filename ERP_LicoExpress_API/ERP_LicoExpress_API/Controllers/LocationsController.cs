@@ -42,17 +42,16 @@ namespace ERP_LicoExpress_API.Controllers
             }
         }
 
-        /* FALTAAA
-
-        [HttpDelete("{supplier_id:int}")]
-        public async Task<IActionResult> DeleteAsync(int supplier_id)
+        
+        [HttpDelete("{location_id:int}")]
+        public async Task<IActionResult> DeleteAsync(int location_id)
         {
             try
             {
-                await _supplierService
-                    .DeleteAsync(supplier_id);
+                await _locationService
+                    .DeleteAsync(location_id);
 
-                return Ok($"Proveedor {supplier_id} fue eliminado");
+                return Ok($"Sede {location_id} fue eliminada");
 
             }
             catch (AppValidationException error)
@@ -67,14 +66,14 @@ namespace ERP_LicoExpress_API.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(Supplier unSupplier)
+        public async Task<IActionResult> CreateAsync(Location unaLocation)
         {
             try
             {
-                var supplierCreado = await _supplierService
-                    .CreateAsync(unSupplier);
+                var locationCreada = await _locationService
+                    .CreateAsync(unaLocation);
 
-                return Ok(supplierCreado);
+                return Ok(locationCreada);
             }
             catch (AppValidationException error)
             {
@@ -85,6 +84,6 @@ namespace ERP_LicoExpress_API.Controllers
                 return BadRequest($"Error de operacion en DB: {error.Message}");
             }
         }
-        */
+        
     }
 }
