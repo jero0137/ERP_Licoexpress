@@ -22,7 +22,7 @@ namespace ERP_LicoExpress_API.Services
         public async Task<User> GetById(int user_id)
         {
             //Validamos que exista un bus con ese Id
-            var user = await _userRepository.GetByID(user_id);
+            var user = await _userRepository.GetByIdAsync(user_id);
 
             if (user.Id == 0)
                 throw new AppValidationException($"Usuario no encontrado con el id {user_id}");
@@ -31,27 +31,20 @@ namespace ERP_LicoExpress_API.Services
         }
 
         //Funcion de servicio para hacer validaciones para el login
-        public async Task<Session> LoginAsync(User user)
+        public async Task<User> LoginAsync(User user)
         {
-            var userExistente = await _userRepository.GetByCorreo(user.Correo);
+            var userExistente = await _userRepository.GetByCorreoAsync(user.Correo);
             //Validamos que el user exista
-            if(userExistente.Id     == 0)
+            if(userExistente.Id == 0)
                 throw new AppValidationException($"Usuario no encontrado");
             //Validamos que la contraseña falta
             //Hay que cifrar la contraseña proximamente
             if(userExistente.Contrasena != user.Contrasena)
                 throw new AppValidationException($"La constraseña del usuario no coincide");
 
-            //LLenamos los datos de la session
-            //Por ahora el token es el hashcode de la clase
-            Session session = new Session();
-
-            session.Token = $"{userExistente.GetHashCode()}";
-            session.Fecha_creacion = DateTime.Now;
-            session.Fecha_terminacion = DateTime.Now;
             try
             {
-                bool resultadoAccion = await _userRepository.CreateSessionAsync(session);
+                bool resultadoAccion = true;
 
                 if (!resultadoAccion)
                     throw new AppValidationException("Operación ejecutada pero no generó cambios en la DB");
@@ -62,7 +55,43 @@ namespace ERP_LicoExpress_API.Services
                 throw error;
             }
 
-            return session;
+            return userExistente;
+        }
+
+        public async Task<User> CreateUserAsync(User unUsuario)
+        {
+            if (unUsuario.Correo.Length== 0)
+                throw new AppValidationException("No se puede insertar un usuario sin un correo");
+
+            if (unUsuario.Contrasena.Length == 0)
+                throw new AppValidationException("No se puede insertar un usuario sin una cpntraseña");
+
+            if (unUsuario.Rol.Length == 0)
+                throw new AppValidationException("No se puede insertar un usuario sin un rol");
+
+            if (unUsuario.Sede_id == 0)
+                throw new AppValidationException("No se puede insertar un usuario sin una sede asignada");
+
+            var userExistente = await _userRepository.GetByCorreoAsync(unUsuario.Correo);
+            if(userExistente.Id != 0)
+                throw new AppValidationException("Ya existe un usuario con este correo");
+
+            try
+            {
+                bool resultadoAccion = await _userRepository.CreateAsync(unUsuario);
+
+                if (!resultadoAccion)
+                    throw new AppValidationException("Operación ejecutada pero no generó cambios en la DB");
+
+                userExistente = await _userRepository.GetByIdAsync(unUsuario.Id);
+
+            }
+            catch (DbOperationException error)
+            {
+                throw error;
+            }
+
+            return userExistente;
         }
         /*
         public async Task<User> Authenticate(User user)

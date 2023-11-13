@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ERP_LicoExpress_API.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController : Controller
     {
@@ -35,5 +35,26 @@ namespace ERP_LicoExpress_API.Controllers
 
             }
         }
+
+        [HttpPost("signup")]
+        public async Task<IActionResult> CreateUserAsync(User user)
+        {
+            try
+            {
+                var userIngresado = await _userService.CreateUserAsync(user);
+
+                return Ok(userIngresado);
+            }
+            catch (AppValidationException error)
+            {
+                return BadRequest($"Error de validación: {error.Message}");
+            }
+            catch (DbOperationException error)
+            {
+                return BadRequest($"Error de operacion en DB: {error.Message}");
+
+            }
+        }
+
     }
 }

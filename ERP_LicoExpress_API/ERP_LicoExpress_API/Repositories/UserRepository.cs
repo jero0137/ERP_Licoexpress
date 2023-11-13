@@ -30,6 +30,9 @@ namespace ERP_LicoExpress_API.Repositories
                 var parametros = new
                 {
                     p_correo = user.Correo,
+                    p_contrasena = user.Contrasena,
+                    p_rol = user.Rol,
+                    p_sede_id=user.Sede_id
                 };
 
                 var cantidad_filas = await conexion.ExecuteAsync(
@@ -48,7 +51,7 @@ namespace ERP_LicoExpress_API.Repositories
             return resultadoAccion;
         }
 
-        public async Task<User> GetByCorreo(string correo)
+        public async Task<User> GetByCorreoAsync(string correo)
         {
             User user = new();
 
@@ -74,7 +77,7 @@ namespace ERP_LicoExpress_API.Repositories
             return user;
         }
 
-        public async Task<User> GetByID(int user_id)
+        public async Task<User> GetByIdAsync(int user_id)
         {
             User user = new();
 
@@ -100,35 +103,5 @@ namespace ERP_LicoExpress_API.Repositories
             return user;
         }
 
-        //Funcion de repositorio para crear una sesion una vez se haga login
-        public async Task<bool> CreateSessionAsync(Session sesion)
-        {
-            bool resultadoAccion = false;
-
-            try
-            {
-                var conexion = contextoDB.CreateConnection();
-
-                string procedimiento = "core.p_inserta_sesion";
-                var parametros = new
-                {
-                    p_token = sesion.Token
-                }; 
-
-                var cantidad_filas = await conexion.ExecuteAsync(
-                    procedimiento,
-                    parametros,
-                    commandType: CommandType.StoredProcedure);
-
-                if (cantidad_filas != 0)
-                    resultadoAccion = true;
-            }
-            catch (NpgsqlException error)
-            {
-                throw new DbOperationException(error.Message);
-            }
-
-            return resultadoAccion;
-        }
     }
 }

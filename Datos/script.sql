@@ -2,15 +2,10 @@ create table usuarios(
 	id int NOT NULL GENERATED ALWAYS AS IDENTITY,
 	correo varchar(30) NOT NULL,
 	contrasena varchar(200) not null,
+	rol varchar(30) not null,
+	sede_id int not null,
 	CONSTRAINT usuarios_pk PRIMARY KEY (id)
 );
-
-create table sesiones(
-	token_sesion varchar(200),
-	fecha_creacion date,
-	fecha_fin date
-);
-
 
 create table proveedores (
 	id int4 not null generated always as identity,
@@ -23,14 +18,17 @@ create table proveedores (
 	ciudad varchar not null
 );
 
-create or replace procedure p_inserta_sesion(
-                    in p_token varchar)
+create or replace procedure p_inserta_user(
+                    in p_correo varchar,
+                    in p_contrasena varchar,
+                    in p_rol varchar,
+                    in p_sede_id int)
     language plpgsql
 as
 $$
     begin
-        insert into sesiones(token_sesion, fecha_creacion, fecha_fin)
-        values(p_token, now(), now());
+        insert into usuarios(correo, contrasena, rol, sede_id)
+        values(p_correo, p_contrasena, p_rol, p_sede_id);
     end;
 $$;
 
