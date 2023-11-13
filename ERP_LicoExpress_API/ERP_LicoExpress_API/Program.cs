@@ -12,8 +12,11 @@ builder.Services.AddSingleton<PgsqlDbContext>();
 
 builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
-
+builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<LocationService>();
 builder.Services.AddScoped<SupplierService>();
 builder.Services.AddScoped<UserService>();
 
