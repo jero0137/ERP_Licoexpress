@@ -83,7 +83,7 @@ namespace ERP_LicoExpress_API.Services
                 if (!resultadoAccion)
                     throw new AppValidationException("Operación ejecutada pero no generó cambios en la DB");
 
-                userExistente = await _userRepository.GetByIdAsync(unUsuario.Id);
+                userExistente = await _userRepository.GetByCorreoAsync(unUsuario.Correo);
 
             }
             catch (DbOperationException error)

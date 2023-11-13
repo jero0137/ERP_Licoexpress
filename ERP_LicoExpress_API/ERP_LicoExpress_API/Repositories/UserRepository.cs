@@ -26,7 +26,7 @@ namespace ERP_LicoExpress_API.Repositories
             {
                 var conexion = contextoDB.CreateConnection();
 
-                string procedimiento = "core.p_inserta_user";
+                string procedimiento = "core.p_inserta_usuario";
                 var parametros = new
                 {
                     p_correo = user.Correo,
@@ -61,7 +61,7 @@ namespace ERP_LicoExpress_API.Repositories
             parametrosSentencia.Add("@correo", correo,
                                     DbType.String, ParameterDirection.Input);
 
-            string sentenciaSQL = "SELECT id, correo, contrasena " +
+            string sentenciaSQL = "SELECT id, correo, contrasena , rol, sede_id " +
                 "FROM usuarios " +
                 "WHERE correo = @correo";
 

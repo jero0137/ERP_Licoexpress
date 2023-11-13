@@ -22,7 +22,7 @@ create table proveedores (
 	constraint proveedores_pk primary key (id)
 );
 
-create table public.sedes (
+create table sedes (
 	id int4 not null generated always as identity,
 	nombre varchar not null,
 	direccion varchar not null,
@@ -33,13 +33,13 @@ create table public.sedes (
 	constraint sedes_pk primary key (id)
 );
 
-create table public.tipos (
+create table tipos (
 	id int4 not null generated always as identity,
 	descripcion varchar not null,
 	constraint tipos_pk primary key (id)
 );
 
-create table public.productos (
+create table productos (
 	id int4 not null generated always as identity,
 	nombre varchar not null,
 	tipo_id int4 not null,
@@ -52,7 +52,10 @@ create table public.productos (
 );
 
 create or replace procedure p_inserta_usuario(
-                    in p_token varchar)
+                    in p_correo varchar,
+                    in p_contrasena varchar,
+                    in p_rol varchar,
+                    in p_sede_id int)
     language plpgsql
 as
 $$
