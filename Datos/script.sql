@@ -87,6 +87,17 @@ $$
     end;
 $$;
 
+create or replace procedure p_eliminar_usuario(
+                    in p_user_id int)
+    language plpgsql
+as
+$$
+    begin
+        delete from usuarios
+        where id = p_user_id;
+    end;
+$$;
+
 create or replace procedure p_elimina_supplier(in p_id integer)
 language plpgsql 
 as $$
