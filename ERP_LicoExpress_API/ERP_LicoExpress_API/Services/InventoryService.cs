@@ -14,15 +14,15 @@ namespace ERP_LicoExpress_API.Services
             _inventoryRepository = inventoryRepository;
         }
 
-        public async Task<Inventory> GetByLocationAsync(int location_id)
+        public async Task<IEnumerable<Inventory>> GetByLocationAsync(int location_id)
         {
-            var unInventory= await _inventoryRepository
+            var losInventories= await _inventoryRepository
                 .GetByLocationAsync(location_id);
 
-            if (unInventory.Id == 0)
+            if (losInventories.Count() == 0)
                 throw new AppValidationException($"Inventario no encontrado para la sede {location_id}");
 
-            return unInventory;
+            return losInventories;
         }
 
         

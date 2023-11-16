@@ -21,9 +21,9 @@ namespace ERP_LicoExpress_API.Controllers
         {
             try
             {
-                var unInventory = await _inventoryService
+                var losInventory = await _inventoryService
                     .GetByLocationAsync(location_id);
-                return Ok(unInventory);
+                return Ok(losInventory);
             }
             catch (AppValidationException error)
             {

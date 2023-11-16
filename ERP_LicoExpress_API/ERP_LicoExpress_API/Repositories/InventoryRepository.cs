@@ -17,7 +17,7 @@ namespace ERP_LicoExpress_API.Repositories
         }
 
 
-        public async Task<Inventory> GetByLocationAsync(int id)
+        public async Task<IEnumerable<Inventory>> GetByLocationAsync(int id)
         {
             Inventory unInventory = new();
 
@@ -31,13 +31,10 @@ namespace ERP_LicoExpress_API.Repositories
                         "FROM inventarios " +
                         "WHERE sede_id=@location_id";
 
-            var resultado = await conexion.QueryAsync<Inventory>(sentenciaSQL,
+            var resultadoInventories = await conexion.QueryAsync<Inventory>(sentenciaSQL,
                                 parametrosSentencia);
 
-            if (resultado.Any())
-                unInventory = resultado.First();
-
-            return unInventory;
+            return resultadoInventories;
         }
 
         
