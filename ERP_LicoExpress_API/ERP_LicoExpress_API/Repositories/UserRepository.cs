@@ -19,14 +19,15 @@ namespace ERP_LicoExpress_API.Repositories
 
         }
 
-        public async Task<IEnumerable<User>> GetAllAsync()
+        public async Task<IEnumerable<UserDetailed>> GetAllAsync()
         {
             var conexion = contextoDB.CreateConnection();
 
-            string sentenciaSQL = "SELECT id, correo, contrasena, rol, sede_id " +
-                        "FROM usuarios u ";
+            string sentenciaSQL = "SELECT u.id, correo, rol, s.nombre sede " +
+                        "FROM usuarios u " +
+                        "JOIN sedes s on s.id=u.sede_id ";
 
-            var resultadoProducts = await conexion.QueryAsync<User>(sentenciaSQL,
+            var resultadoProducts = await conexion.QueryAsync<UserDetailed>(sentenciaSQL,
                                         new DynamicParameters());
 
             return resultadoProducts;
