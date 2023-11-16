@@ -17,7 +17,7 @@ namespace ERP_LicoExpress_API.Repositories
         }
 
 
-        public async Task<IEnumerable<Inventory>> GetByLocationAsync(int id)
+        public async Task<IEnumerable<InventoryDetailed>> GetByLocationAsync(int id)
         {
             Inventory unInventory = new();
 
@@ -27,11 +27,13 @@ namespace ERP_LicoExpress_API.Repositories
             parametrosSentencia.Add("@location_id", id,
                                     DbType.Int32, ParameterDirection.Input);
 
-            string sentenciaSQL = "SELECT id, sede_id, producto_id, fecha_vencimiento, lote, stock  " +
-                        "FROM inventarios " +
+            string sentenciaSQL = "SELECT i.id, s.nombre sede, p.nombre producto, fecha_vencimiento, lote, stock  " +
+                        "FROM inventarios i " +
+                        "JOIN sedes s ON s.id=i.sede_id "+
+                        "JOIN productos p ON p.id=i.producto_id " +
                         "WHERE sede_id=@location_id";
 
-            var resultadoInventories = await conexion.QueryAsync<Inventory>(sentenciaSQL,
+            var resultadoInventories = await conexion.QueryAsync<InventoryDetailed>(sentenciaSQL,
                                 parametrosSentencia);
 
             return resultadoInventories;

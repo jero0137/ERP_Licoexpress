@@ -4,7 +4,7 @@ namespace ERP_LicoExpress_API.Interfaces
 {
     public interface IInventoryRepository
     {
-        public Task<IEnumerable<Inventory>> GetByLocationAsync(int id);
+        public Task<IEnumerable<InventoryDetailed>> GetByLocationAsync(int id);
 
     }
 }

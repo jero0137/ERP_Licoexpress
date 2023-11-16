@@ -14,7 +14,7 @@ namespace ERP_LicoExpress_API.Services
             _inventoryRepository = inventoryRepository;
         }
 
-        public async Task<IEnumerable<Inventory>> GetByLocationAsync(int location_id)
+        public async Task<IEnumerable<InventoryDetailed>> GetByLocationAsync(int location_id)
         {
             var losInventories= await _inventoryRepository
                 .GetByLocationAsync(location_id);
