@@ -46,5 +46,26 @@ namespace ERP_LicoExpress_API.Controllers
             }
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAsync(Inventory unInventory)
+        {
+            try
+            {
+                var inventoryCreado = await _inventoryService
+                    .CreateAsync(unInventory);
+
+                return Ok(inventoryCreado);
+            }
+            catch (AppValidationException error)
+            {
+                return BadRequest($"Error de validación: {error.Message}");
+            }
+            catch (DbOperationException error)
+            {
+                return BadRequest($"Error de operacion en DB: {error.Message}");
+            }
+        }
+
     }
 }

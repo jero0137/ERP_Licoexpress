@@ -64,6 +64,40 @@ namespace ERP_LicoExpress_API.Repositories
             return resultadoInventories;
         }
 
+        public async Task<bool> CreateAsync(Inventory unInventory)
+        {
+            bool resultadoAccion = false;
+
+            try
+            {
+                var conexion = contextoDB.CreateConnection();
+
+                string procedimiento = "p_inserta_inventory";
+                var parametros = new
+                {
+                    p_sede = unInventory.Sede_id,
+                    p_producto = unInventory.Producto_id,
+                    p_fecha_vencimiento = unInventory.Fecha_vencimiento,
+                    p_lote = unInventory.Lote,
+                    p_stock = unInventory.Stock
+                };
+
+                var cantidad_filas = await conexion.ExecuteAsync(
+                    procedimiento,
+                    parametros,
+                    commandType: CommandType.StoredProcedure);
+
+                if (cantidad_filas != 0)
+                    resultadoAccion = true;
+            }
+            catch (NpgsqlException error)
+            {
+                throw new DbOperationException(error.Message);
+            }
+
+            return resultadoAccion;
+        }
+
 
 
     }

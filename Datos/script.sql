@@ -144,6 +144,15 @@ end;
 $$;
 
 
+create or replace procedure p_inserta_inventory(in p_sede integer, in p_producto integer,
+in p_fecha_vencimiento varchar, in p_lote integer, in p_stock integer)
+language plpgsql    
+as $$
+begin
+    insert into inventarios(sede_id, producto_id, fecha_vencimiento, lote, stock)
+    values (p_sede, p_producto, p_fecha_vencimiento, p_lote, p_stock);
+end;
+$$;
 
 create or replace procedure p_elimina_location(in p_id integer)
 language plpgsql 

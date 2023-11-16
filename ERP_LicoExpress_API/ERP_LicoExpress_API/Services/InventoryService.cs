@@ -38,5 +38,42 @@ namespace ERP_LicoExpress_API.Services
         }
 
 
+
+        public async Task<Inventory> CreateAsync(Inventory unInventory)
+        {
+            if (unInventory.Sede_id == 0)
+                throw new AppValidationException("No se puede insertar un inventario sin sede");
+
+            if (unInventory.Producto_id == 0)
+                throw new AppValidationException("No se puede insertar un inventario sin un producto");
+
+            if (unInventory.Fecha_vencimiento.Length == 0)
+                throw new AppValidationException("No se puede insertar un inventario sin un una fecha de vencimiento");
+
+            if (unInventory.Lote == 0)
+                throw new AppValidationException("No se puede insertar un inventario sin un lote");
+
+            if (unInventory.Stock == 0)
+                throw new AppValidationException("No se puede insertar un inventario sin un stock");
+
+
+            try
+            {
+                bool resultadoAccion = await _inventoryRepository.CreateAsync(unInventory);
+
+                if (!resultadoAccion)
+                    throw new AppValidationException("Operación ejecutada pero no generó cambios en la DB");
+
+                return unInventory;
+
+            }
+            catch (DbOperationException error)
+            {
+                throw error;
+            }
+
+
+        }
+
     }
 }
