@@ -1,4 +1,4 @@
-﻿namespace GestionTransporte_CS_API_PostgresSQL.Helpers
+﻿namespace ERP_LicoExpress_API.Helpers
 {
     public class DbOperationException : Exception
     {
