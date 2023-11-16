@@ -65,7 +65,7 @@ namespace ERP_LicoExpress_API.Controllers
             }
         }
 
-        [HttpDelete("eliminar/{user_id int}")]
+        [HttpDelete("{user_id int}")]
         public async Task<IActionResult> DeleteAsync(int user_id)
         {
             try
