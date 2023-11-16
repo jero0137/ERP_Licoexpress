@@ -19,6 +19,11 @@ namespace ERP_LicoExpress_API.Services
             _userRepository = userRepository;
         }
 
+        public async Task<IEnumerable<User>> GetAllAsync(){
+            
+            return await _userRepository.GetAllAsync();
+        }
+
         public async Task<User> GetById(int user_id)
         {
             //Validamos que exista un bus con ese Id
@@ -92,6 +97,29 @@ namespace ERP_LicoExpress_API.Services
             }
 
             return userExistente;
+        }
+
+        public async Task<bool> DeleteAsync(int user_id)
+        {
+            var userExistente = await _userRepository.GetByIdAsync(user_id);
+
+            if(userExistente.Id == 0)
+                throw new AppValidationException("No eciste un usuario con este id");
+
+            try
+            {
+                bool resultadoAccion = await _userRepository.DeleteAsync(userExistente);
+
+                if (!resultadoAccion)
+                    throw new AppValidationException("Operación ejecutada pero no generó cambios en la DB");
+
+                return resultadoAccion;
+
+            }
+            catch (DbOperationException error)
+            {
+                throw error;
+            }
         }
         /*
         public async Task<User> Authenticate(User user)

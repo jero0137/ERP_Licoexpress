@@ -16,6 +16,15 @@ namespace ERP_LicoExpress_API.Controllers
             _userService = userService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllAsync()
+        {
+            var usuarios = await _userService
+                .GetAllAsync();
+
+            return Ok(usuarios);
+        }
+
         [HttpPost("login")]
         public async Task<IActionResult> Login(User user)
         {
@@ -42,6 +51,26 @@ namespace ERP_LicoExpress_API.Controllers
             try
             {
                 var userIngresado = await _userService.CreateUserAsync(user);
+
+                return Ok(userIngresado);
+            }
+            catch (AppValidationException error)
+            {
+                return BadRequest($"Error de validación: {error.Message}");
+            }
+            catch (DbOperationException error)
+            {
+                return BadRequest($"Error de operacion en DB: {error.Message}");
+
+            }
+        }
+
+        [HttpDelete("eliminar/{user_id int}")]
+        public async Task<IActionResult> DeleteAsync(int user_id)
+        {
+            try
+            {
+                var userIngresado = await _userService.DeleteAsync(user_id);
 
                 return Ok(userIngresado);
             }

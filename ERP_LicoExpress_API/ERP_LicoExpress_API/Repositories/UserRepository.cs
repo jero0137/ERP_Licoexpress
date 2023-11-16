@@ -18,6 +18,19 @@ namespace ERP_LicoExpress_API.Repositories
             contextoDB = contexto;
 
         }
+
+        public async Task<IEnumerable<User>> GetAllAsync()
+        {
+            var conexion = contextoDB.CreateConnection();
+
+            string sentenciaSQL = "SELECT id, correo, contrasena, rol, sede_id " +
+                        "FROM usuarios u ";
+
+            var resultadoProducts = await conexion.QueryAsync<User>(sentenciaSQL,
+                                        new DynamicParameters());
+
+            return resultadoProducts;
+        }
         public async Task<bool> CreateAsync(User user)
         {
             bool resultadoAccion = false;
@@ -26,13 +39,42 @@ namespace ERP_LicoExpress_API.Repositories
             {
                 var conexion = contextoDB.CreateConnection();
 
-                string procedimiento = "core.p_inserta_usuario";
+                string procedimiento = "p_inserta_usuario";
                 var parametros = new
                 {
                     p_correo = user.Correo,
                     p_contrasena = user.Contrasena,
                     p_rol = user.Rol,
                     p_sede_id=user.Sede_id
+                };
+
+                var cantidad_filas = await conexion.ExecuteAsync(
+                    procedimiento,
+                    parametros,
+                    commandType: CommandType.StoredProcedure);
+
+                if (cantidad_filas != 0)
+                    resultadoAccion = true;
+            }
+            catch (NpgsqlException error)
+            {
+                throw new DbOperationException(error.Message);
+            }
+
+            return resultadoAccion;
+        }
+        public async Task<bool> DeleteAsync(User user)
+        {
+            bool resultadoAccion = false;
+
+            try
+            {
+                var conexion = contextoDB.CreateConnection();
+
+                string procedimiento = "p_eliminar_usuario";
+                var parametros = new
+                {
+                    p_user_id = user.Id
                 };
 
                 var cantidad_filas = await conexion.ExecuteAsync(
@@ -102,6 +144,8 @@ namespace ERP_LicoExpress_API.Repositories
 
             return user;
         }
+
+        
 
     }
 }
