@@ -1,20 +1,20 @@
 {
   "version": 2,
-  "dgSpecHash": "tIrGONoeUhQRIqs27bWCKDsiSXlYaY8+6t/wTb4OLmm4qR7knjlxFqugjO3V1H8KPS+rQfQhpcNrso/x07Kxiw==",
+  "dgSpecHash": "k5B9tmq+oMTvOswhaFyyqusXPDejTXAS8M70wjBn7WNdeH8Jnir/9U+LRZffoOrjEGKJzYmVcOgzh+MRb9lTuA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\User\\OneDrive - UPB\\Documentos\\SEMESTRE VI\\SISTEMAS EMPRESARIALES\\ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\ERP_LicoExpress_API.csproj",
+  "projectFilePath": "C:\\Users\\jga6\\Desktop\\Jero\\ERP_Licoexpress\\ERP_LicoExpress_API\\ERP_LicoExpress_API\\ERP_LicoExpress_API.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\User\\.nuget\\packages\\dapper\\2.1.15\\dapper.2.1.15.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.13\\microsoft.aspnetcore.authentication.jwtbearer.7.0.13.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\microsoft.identitymodel.abstractions\\7.0.3\\microsoft.identitymodel.abstractions.7.0.3.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\7.0.3\\microsoft.identitymodel.jsonwebtokens.7.0.3.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\microsoft.identitymodel.logging\\7.0.3\\microsoft.identitymodel.logging.7.0.3.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\microsoft.identitymodel.protocols\\6.15.1\\microsoft.identitymodel.protocols.6.15.1.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\6.15.1\\microsoft.identitymodel.protocols.openidconnect.6.15.1.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\microsoft.identitymodel.tokens\\7.0.3\\microsoft.identitymodel.tokens.7.0.3.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\npgsql\\7.0.6\\npgsql.7.0.6.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\system.identitymodel.tokens.jwt\\7.0.3\\system.identitymodel.tokens.jwt.7.0.3.nupkg.sha512"
+    "C:\\Users\\jga6\\.nuget\\packages\\dapper\\2.1.15\\dapper.2.1.15.nupkg.sha512",
+    "C:\\Users\\jga6\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.13\\microsoft.aspnetcore.authentication.jwtbearer.7.0.13.nupkg.sha512",
+    "C:\\Users\\jga6\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\jga6\\.nuget\\packages\\microsoft.identitymodel.abstractions\\7.0.3\\microsoft.identitymodel.abstractions.7.0.3.nupkg.sha512",
+    "C:\\Users\\jga6\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\7.0.3\\microsoft.identitymodel.jsonwebtokens.7.0.3.nupkg.sha512",
+    "C:\\Users\\jga6\\.nuget\\packages\\microsoft.identitymodel.logging\\7.0.3\\microsoft.identitymodel.logging.7.0.3.nupkg.sha512",
+    "C:\\Users\\jga6\\.nuget\\packages\\microsoft.identitymodel.protocols\\6.15.1\\microsoft.identitymodel.protocols.6.15.1.nupkg.sha512",
+    "C:\\Users\\jga6\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\6.15.1\\microsoft.identitymodel.protocols.openidconnect.6.15.1.nupkg.sha512",
+    "C:\\Users\\jga6\\.nuget\\packages\\microsoft.identitymodel.tokens\\7.0.3\\microsoft.identitymodel.tokens.7.0.3.nupkg.sha512",
+    "C:\\Users\\jga6\\.nuget\\packages\\npgsql\\7.0.6\\npgsql.7.0.6.nupkg.sha512",
+    "C:\\Users\\jga6\\.nuget\\packages\\system.identitymodel.tokens.jwt\\7.0.3\\system.identitymodel.tokens.jwt.7.0.3.nupkg.sha512"
   ],
   "logs": []
 }
