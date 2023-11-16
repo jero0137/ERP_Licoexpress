@@ -19,15 +19,17 @@ namespace ERP_LicoExpress_API.Repositories
         }
 
 
-        public async Task<IEnumerable<Product>> GetAllAsync()
+        public async Task<IEnumerable<ProductDetailed>> GetAllAsync()
         {
             var conexion = contextoDB.CreateConnection();
 
-            string sentenciaSQL = "SELECT id, nombre, tipo_id, tamaño, imagen, precio_base, precio_venta, proveedor_id  " +
-                        "FROM productos " +
+            string sentenciaSQL = "SELECT p.id , nombre, tipo_id, t.descripcion tipo_name, tamaño, imagen, precio_base, precio_venta, proveedor_id, pr.nombre_empresa proveedor_name " +
+                        "FROM productos p " +
+                        "JOIN tipos t on t.id = p.tipo_id " +
+                        "JOIN proveedores pr on pr.id = p.proveedor_id " +
                         "ORDER BY id DESC";
 
-            var resultadoProducts = await conexion.QueryAsync<Product>(sentenciaSQL,
+            var resultadoProducts = await conexion.QueryAsync<ProductDetailed>(sentenciaSQL,
                                         new DynamicParameters());
 
             return resultadoProducts;

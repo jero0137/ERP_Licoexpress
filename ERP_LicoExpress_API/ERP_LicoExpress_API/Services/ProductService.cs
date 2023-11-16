@@ -14,7 +14,7 @@ namespace ERP_LicoExpress_API.Services
             _productRepository = productRepository;
         }
 
-        public async Task<IEnumerable<Product>> GetAllAsync()
+        public async Task<IEnumerable<ProductDetailed>> GetAllAsync()
         {
             return await _productRepository
                 .GetAllAsync();
