@@ -31,5 +31,20 @@ namespace ERP_LicoExpress_API.Controllers
             }
         }
 
+        [HttpGet("{location_id:int}/{product_id:int}")]
+        public async Task<IActionResult> GetByLocationProductAsync(int location_id, int product_id)
+        {
+            try
+            {
+                var losInventory = await _inventoryService
+                    .GetByLocationProductAsync(location_id, product_id);
+                return Ok(losInventory);
+            }
+            catch (AppValidationException error)
+            {
+                return NotFound(error.Message);
+            }
+        }
+
     }
 }
