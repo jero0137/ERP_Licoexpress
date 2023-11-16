@@ -19,7 +19,7 @@ namespace ERP_LicoExpress_API.Services
             _userRepository = userRepository;
         }
 
-        public async Task<IEnumerable<User>> GetAllAsync(){
+        public async Task<IEnumerable<UserDetailed>> GetAllAsync(){
             
             return await _userRepository.GetAllAsync();
         }
