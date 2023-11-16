@@ -66,6 +66,12 @@ alter table public.inventarios add constraint sedes_inventario_fk foreign key (s
 alter table public.inventarios add constraint producto_inventario_fk foreign key (producto_id) references public.productos(id);
 
 
+create table public.productosxproveedor (
+	id int4 not null generated always as identity,
+	producto_id int4 not null,
+	proveedor_id int4 not null,
+	constraint productosxproveedor_pk primary key (id)
+);
 
 create or replace procedure p_inserta_usuario(
                     in p_correo varchar,
