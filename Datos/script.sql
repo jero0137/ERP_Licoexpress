@@ -52,7 +52,7 @@ create table productos (
 );
 
 
-create table public.inventarios (
+create table inventarios (
 	id int4 not null generated always as identity,
 	sede_id int4 not null,
 	producto_id int4 not null,
@@ -62,8 +62,8 @@ create table public.inventarios (
 	constraint inventarios_pk primary key (id)
 );
 
-alter table public.inventarios add constraint sedes_inventario_fk foreign key (sede_id) references public.sedes(id);
-alter table public.inventarios add constraint producto_inventario_fk foreign key (producto_id) references public.productos(id);
+alter table inventarios add constraint sedes_inventario_fk foreign key (sede_id) references sedes(id);
+alter table inventarios add constraint producto_inventario_fk foreign key (producto_id) references productos(id);
 
 
 create table public.productosxproveedor (
@@ -153,6 +153,15 @@ begin
 end;
 $$;
 
+--Vista para ver la cantidad de cada producto por sede
+create view cantidad_productosXsede as
+	select s.nombre Sede, p.nombre Producto ,sum(i.stock) Cantidad
+	from inventarios i 
+	join productos p on p.id = i.producto_id 
+	join sedes s on s.id = i.sede_id
+	group by s.nombre , p.nombre
+
+
 ----------------------------------------------------------------------------------------
 
 -- Insertar datos en la tabla de sedes
@@ -191,3 +200,24 @@ VALUES
   ('Johnnie Walker Black Label', 1, '750ml', 'https://static.wixstatic.com/media/477dc5_f3e8aa2c49de486f8b6b6a0e0c736842~mv2.png/v1/fill/w_560,h_560,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/477dc5_f3e8aa2c49de486f8b6b6a0e0c736842~mv2.png', 150000, 175000, 1),
   ('Havana Club Añejo 7 Años', 3, '700ml', 'https://d2j6dbq0eux0bg.cloudfront.net/images/30491376/1617549085.jpg', 80000, 95000, 2),
   ('Patrón Reposado', 4, '750ml', 'https://licoresmedellin.com/cdn/shop/products/tequila-patron-reposado-botella-700mltequila-patron-reposado-botella-700mlpatronlicores-medellin-658858.png?crop=center&height=600&v=1681662091&width=600', 120000, 140000, 3);
+
+INSERT INTO inventarios (sede_id, producto_id, fecha_vencimiento, lote, stock)
+VALUES 
+  (1, 1, '2023-01-01', 1, 10),
+  (1, 1, '2023-02-01', 2, 20),
+  (1, 1, '2023-03-01', 3, 15),
+  (1, 1, '2023-04-01', 4, 25),
+  (1, 1, '2023-05-01', 5, 18),
+  (1, 1, '2023-06-01', 6, 30),
+  (1, 1, '2023-07-01', 7, 22);
+ 
+INSERT INTO inventarios (sede_id, producto_id, fecha_vencimiento, lote, stock)
+VALUES 
+  (2, 2, '2023-01-01', 1, 15),
+  (2, 2, '2023-02-01', 2, 25),
+  (2, 2, '2023-03-01', 3, 18),
+  (2, 2, '2023-04-01', 4, 30),
+  (2, 2, '2023-05-01', 5, 22),
+  (2, 2, '2023-06-01', 6, 35),
+  (2, 2, '2023-07-01', 7, 28);
+
