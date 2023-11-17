@@ -231,11 +231,11 @@ $$;
 
 --Vista para ver la cantidad de cada producto por sede
 create view cantidad_productosXsede as
-	select s.nombre Sede, p.nombre Producto ,sum(i.stock) Cantidad
+	select s.id id,s.nombre sede, p.nombre producto ,sum(i.stock) cantidad
 	from inventarios i 
 	join productos p on p.id = i.producto_id 
 	join sedes s on s.id = i.sede_id
-	group by s.nombre , p.nombre
+	group by s.id,s.nombre , p.nombre;
 
 
 ----------------------------------------------------------------------------------------
@@ -277,7 +277,7 @@ VALUES
   ('Havana Club Añejo 7 Años', 3, '700ml', 'https://d2j6dbq0eux0bg.cloudfront.net/images/30491376/1617549085.jpg', 80000, 95000, 2),
   ('Patrón Reposado', 4, '750ml', 'https://licoresmedellin.com/cdn/shop/products/tequila-patron-reposado-botella-700mltequila-patron-reposado-botella-700mlpatronlicores-medellin-658858.png?crop=center&height=600&v=1681662091&width=600', 120000, 140000, 3);
 
-INSERT INTO inventarios (sede_id, producto_id, fecha_vencimiento, lote, stock)
+INSERT INTO inventarios (sede_id, producto_id, fecha_registro, lote, stock)
 VALUES 
   (1, 1, '2023-01-01', 1, 10),
   (1, 1, '2023-02-01', 2, 20),
@@ -287,7 +287,7 @@ VALUES
   (1, 1, '2023-06-01', 6, 30),
   (1, 1, '2023-07-01', 7, 22);
  
-INSERT INTO inventarios (sede_id, producto_id, fecha_vencimiento, lote, stock)
+INSERT INTO inventarios (sede_id, producto_id, fecha_registro, lote, stock)
 VALUES 
   (2, 2, '2023-01-01', 1, 15),
   (2, 2, '2023-02-01', 2, 25),
