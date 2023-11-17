@@ -47,13 +47,13 @@ namespace ERP_LicoExpress_API.Controllers
         }
 
 
-        [HttpPost]
-        public async Task<IActionResult> CreateAsync(Inventory unInventory)
+        [HttpPost("{location_id:int}")]
+        public async Task<IActionResult> CreateAsync(int location_id, Inventory unInventory)
         {
             try
             {
                 var inventoryCreado = await _inventoryService
-                    .CreateAsync(unInventory);
+                    .CreateAsync(location_id,unInventory);
 
                 return Ok(inventoryCreado);
             }

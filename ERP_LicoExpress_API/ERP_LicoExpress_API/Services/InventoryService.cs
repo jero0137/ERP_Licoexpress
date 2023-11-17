@@ -53,9 +53,9 @@ namespace ERP_LicoExpress_API.Services
 
 
 
-        public async Task<Inventory> CreateAsync(Inventory unInventory)
+        public async Task<Inventory> CreateAsync(int location_id, Inventory unInventory)
         {
-            if (unInventory.Sede_id == 0)
+            if (location_id == 0)
                 throw new AppValidationException("No se puede insertar un inventario sin sede");
 
             if (unInventory.Producto_id == 0)
@@ -73,7 +73,7 @@ namespace ERP_LicoExpress_API.Services
 
             try
             {
-                bool resultadoAccion = await _inventoryRepository.CreateAsync(unInventory);
+                bool resultadoAccion = await _inventoryRepository.CreateAsync(location_id, unInventory);
 
                 if (!resultadoAccion)
                     throw new AppValidationException("Operación ejecutada pero no generó cambios en la DB");

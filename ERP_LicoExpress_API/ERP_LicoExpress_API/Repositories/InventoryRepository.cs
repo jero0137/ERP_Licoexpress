@@ -88,7 +88,7 @@ namespace ERP_LicoExpress_API.Repositories
             return resultadoInventories;
         }
 
-        public async Task<bool> CreateAsync(Inventory unInventory)
+        public async Task<bool> CreateAsync(int location_id, Inventory unInventory)
         {
             bool resultadoAccion = false;
 
@@ -99,8 +99,8 @@ namespace ERP_LicoExpress_API.Repositories
                 string procedimiento = "p_inserta_inventory";
                 var parametros = new
                 {
-                    p_sede = unInventory.Sede_id,
-                    p_producto = unInventory.Producto_id,
+                    p_sede_id = location_id,
+                    p_producto_id = unInventory.Producto_id,
                     p_fecha_registro = unInventory.Fecha_registro,
                     p_lote = unInventory.Lote,
                     p_stock = unInventory.Stock
