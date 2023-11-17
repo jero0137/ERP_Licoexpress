@@ -98,5 +98,66 @@ namespace ERP_LicoExpress_API.Services
             }
 
         }
+
+
+        public async Task<Product> UpdateAsync(int producto_id, Product unProducto)
+        {
+
+
+            var productoExistente = await _productRepository
+                .GetByIdAsync(producto_id);
+
+            if (productoExistente.Id == 0)
+                throw new AppValidationException($"No existe un producto registrado con el id {unProducto.Id}");
+
+            if (producto_id != productoExistente.Id)
+                throw new AppValidationException($"Inconsistencia en el Id de la sede a actualizar. Verifica argumentos");
+
+
+            if (productoExistente.Tipo_id == 0)
+                throw new AppValidationException("No se puede actualizar un tipo nulo");
+
+            if (productoExistente.Proveedor_id == 0)
+                throw new AppValidationException("No se puede actualizar un proveedor nulo");
+
+            if (string.IsNullOrEmpty(productoExistente.Tamaño))
+                throw new AppValidationException("No se puede actualizar un tamaño nulo");
+
+            if (string.IsNullOrEmpty(productoExistente.Nombre))
+                throw new AppValidationException("No se puede actualizar un nombre nulo");
+
+            if (string.IsNullOrEmpty(productoExistente.Imagen))
+                throw new AppValidationException("No se puede actualizar una imagen nula");
+
+            if (productoExistente.Precio_base == 0)
+                throw new AppValidationException("No se puede actualizar un precio base nulo");
+
+            if (productoExistente.Precio_venta == 0)
+                throw new AppValidationException("No se puede actualizar un precio venta nulo");
+
+
+            //Validamos que haya al menos un cambio en las propiedades
+            if (unProducto.Equals(productoExistente))
+                throw new AppValidationException("No hay cambios en los atributos del producto. No se realiza actualización.");
+
+            try
+            {
+                bool resultadoAccion = await _productRepository
+                    .UpdateAsync(producto_id, unProducto);
+
+                if (!resultadoAccion)
+                    throw new AppValidationException("Operación ejecutada pero no generó cambios en la DB");
+
+                productoExistente = await _productRepository
+                    .GetByIdAsync(unProducto.Id!);
+            }
+            catch (DbOperationException error)
+            {
+                throw error;
+            }
+
+            return productoExistente;
+
+        }
     }
 }

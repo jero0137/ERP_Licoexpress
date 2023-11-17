@@ -127,5 +127,44 @@ namespace ERP_LicoExpress_API.Repositories
             return resultadoAccion;
         }
 
+
+
+        public async Task<bool> UpdateAsync(int producto_id, Product unProducto)
+        {
+            bool resultadoAccion = false;
+
+            try
+            {
+                var conexion = contextoDB.CreateConnection();
+
+                string procedimiento = "p_actualiza_producto";
+                var parametros = new
+                {
+                    p_id = producto_id,
+                    p_nombre = unProducto.Nombre,
+                    p_tipo_id = unProducto.Tipo_id,
+                    p_tamaño = unProducto.Tamaño,
+                    p_proveedor_id = unProducto.Proveedor_id,
+                    p_imagen = unProducto.Imagen,
+                    p_precio_venta = unProducto.Precio_venta,
+                    p_precio_base = unProducto.Precio_base,
+
+                };
+
+                var cantidad_filas = await conexion.ExecuteAsync(
+                    procedimiento,
+                    parametros,
+                    commandType: CommandType.StoredProcedure);
+
+                if (cantidad_filas != 0)
+                    resultadoAccion = true;
+            }
+            catch (NpgsqlException error)
+            {
+                throw new DbOperationException(error.Message);
+            }
+
+            return resultadoAccion;
+        }
     }
 }

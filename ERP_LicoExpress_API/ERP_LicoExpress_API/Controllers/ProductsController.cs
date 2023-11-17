@@ -84,6 +84,28 @@ namespace ERP_LicoExpress_API.Controllers
             }
         }
 
+
+        [HttpPut("{producto_id:int}")]
+        public async Task<IActionResult> UpdateAsync(int producto_id, Product unProducto)
+        {
+            try
+            {
+                var autobusActualizado = await _productService
+                    .UpdateAsync(producto_id, unProducto);
+
+                return Ok(autobusActualizado);
+
+            }
+            catch (AppValidationException error)
+            {
+                return BadRequest($"Error de validación: {error.Message}");
+            }
+            catch (DbOperationException error)
+            {
+                return BadRequest($"Error de operacion en DB: {error.Message}");
+            }
+        }
+
     }
     
 }
