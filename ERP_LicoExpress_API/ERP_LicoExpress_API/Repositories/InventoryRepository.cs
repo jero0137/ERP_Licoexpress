@@ -152,7 +152,7 @@ namespace ERP_LicoExpress_API.Repositories
             parametrosSentencia.Add("@location_id", location_id,
                                     DbType.Int32, ParameterDirection.Input);
 
-            string sentenciaSQL = "SELECT id, sede, producto, cantidad " +
+            string sentenciaSQL = "SELECT id, sede, producto, cantidad, tipo, proveedor " +
                         "FROM cantidad_productosxsede cp " +
                         "WHERE id=@location_id";
 

@@ -232,11 +232,13 @@ $$;
 
 --Vista para ver la cantidad de cada producto por sede
 create view cantidad_productosXsede as
-	select s.id id,s.nombre sede, p.nombre producto ,sum(i.stock) cantidad
-	from inventarios i 
+	select s.id id,s.nombre sede, p.nombre producto, t.descripcion tipo, pr.nombre_empresa proveedor ,sum(i.stock) cantidad
+	from inventarios i
 	join productos p on p.id = i.producto_id 
 	join sedes s on s.id = i.sede_id
-	group by s.id,s.nombre , p.nombre;
+	join tipos t on t.id = p.tipo_id
+	join proveedores pr on pr.id = p.proveedor_id 
+	group by s.id,s.nombre , p.nombre, t.descripcion, pr.nombre_empresa;
 
 
 ----------------------------------------------------------------------------------------
