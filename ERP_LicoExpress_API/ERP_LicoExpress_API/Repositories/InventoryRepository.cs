@@ -122,7 +122,25 @@ namespace ERP_LicoExpress_API.Repositories
             return resultadoAccion;
         }
 
+        public async Task<IEnumerable<InventoryDetailed>> GetByProductId(int producto_id)
+        {
+            var conexion = contextoDB.CreateConnection();
 
+            DynamicParameters parametrosSentencia = new();
+            parametrosSentencia.Add("@product_id", producto_id,
+                                    DbType.Int32, ParameterDirection.Input);
+
+            string sentenciaSQL = "SELECT i.id, s.nombre sede, p.nombre producto, fecha_vencimiento, lote, stock  " +
+                        "FROM inventarios i " +
+                        "JOIN sedes s ON s.id=i.sede_id " +
+                        "JOIN productos p ON p.id=i.producto_id " +
+                        "WHERE i.producto_id=@product_id";
+
+            var resultadoInventories = await conexion.QueryAsync<InventoryDetailed>(sentenciaSQL,
+                                parametrosSentencia);
+
+            return resultadoInventories;
+        }
 
         public async Task<bool> UpdateAsync(int inventory_id, int location_id, Inventory unInventory)
         {

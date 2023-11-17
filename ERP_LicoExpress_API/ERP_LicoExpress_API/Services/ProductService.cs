@@ -8,10 +8,12 @@ namespace ERP_LicoExpress_API.Services
     public class ProductService
     {
         private readonly IProductRepository _productRepository;
+        private readonly IInventoryRepository _inventoryRepository;
 
-        public ProductService(IProductRepository productRepository)
+        public ProductService(IProductRepository productRepository, IInventoryRepository inventoryRepository)
         {
             _productRepository = productRepository;
+            _inventoryRepository = inventoryRepository;
         }
 
         public async Task<IEnumerable<ProductDetailed>> GetAllAsync()
@@ -39,6 +41,11 @@ namespace ERP_LicoExpress_API.Services
 
             if (productExistente.Id == 0)
                 throw new AppValidationException($"No existe un producto con el Id {product_id} que se pueda eliminar");
+
+            var inventarios =  await _inventoryRepository.GetByProductId(product_id);
+
+            if(inventarios.Count() > 0)
+                throw new AppValidationException($"No se puede eliminar el producto {productExistente.Nombre} ya que hay inventarios que lo registran.");
 
             try
             {
