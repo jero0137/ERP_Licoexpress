@@ -51,15 +51,14 @@ namespace ERP_LicoExpress_API.Services
             return losInventories;
         }
 
-        public async Task<CantProductLocation> GetCantProductByLocationId(int location_id)
+        public async Task<IEnumerable<CantProductLocation>> GetCantProductByLocationId(int location_id)
         {
-            var unaCantidad = await _inventoryRepository
-                .GetCantProductByLocationId(location_id);
+            var cantidades = await _inventoryRepository.GetCantProductByLocationId(location_id);
 
-            if (unaCantidad.Id == 0)
+            if (cantidades.Count() == 0)
                 throw new AppValidationException($"Este inventario no tiene productos regstrados aun");
 
-            return unaCantidad;
+            return cantidades;
         }
 
 

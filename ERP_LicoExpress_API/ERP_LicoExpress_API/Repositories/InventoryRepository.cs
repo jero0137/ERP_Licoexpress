@@ -142,7 +142,7 @@ namespace ERP_LicoExpress_API.Repositories
             return resultadoInventories;
         }
 
-        public async Task<CantProductLocation> GetCantProductByLocationId(int location_id)
+        public async Task<IEnumerable<CantProductLocation>> GetCantProductByLocationId(int location_id)
         {
             var conexion = contextoDB.CreateConnection();
 
@@ -159,10 +159,7 @@ namespace ERP_LicoExpress_API.Repositories
             var resultado = await conexion.QueryAsync<CantProductLocation>(sentenciaSQL,
                                 parametrosSentencia);
 
-            if (resultado.Any())
-                cant = resultado.First();
-
-            return cant;
+            return resultado;
         }
 
         public async Task<bool> UpdateAsync(int inventory_id, int location_id, Inventory unInventory)
