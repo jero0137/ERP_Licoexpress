@@ -87,5 +87,27 @@ namespace ERP_LicoExpress_API.Controllers
             }
         }
 
+
+        [HttpPut("{supplier_id:int}")]
+        public async Task<IActionResult> UpdateAsync(int supplier_id, Supplier unProveedor)
+        {
+            try
+            {
+                var supplierActualizado = await _supplierService
+                    .UpdateAsync(supplier_id, unProveedor);
+
+                return Ok(supplierActualizado);
+
+            }
+            catch (AppValidationException error)
+            {
+                return BadRequest($"Error de validación: {error.Message}");
+            }
+            catch (DbOperationException error)
+            {
+                return BadRequest($"Error de operacion en DB: {error.Message}");
+            }
+        }
+
     }
 }

@@ -92,10 +92,10 @@ namespace ERP_LicoExpress_API.Controllers
         {
             try
             {
-                var autobusActualizado = await _locationService
+                var locationActualizada = await _locationService
                     .UpdateAsync(location_id, unaLocation);
 
-                return Ok(autobusActualizado);
+                return Ok(locationActualizada);
 
             }
             catch (AppValidationException error)

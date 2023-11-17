@@ -154,6 +154,48 @@ begin
 end;
 $$;
 
+
+create or replace procedure p_actualiza_location(in p_id integer, in p_nombre varchar, in p_direccion varchar,
+in p_nombre_admin varchar, in p_contacto_admin varchar, in p_telefono_admin varchar, in p_ciudad varchar)
+language plpgsql
+as
+$$
+begin
+    update sedes  
+    set nombre = p_nombre, direccion = p_direccion, nombre_admin = p_nombre_admin, contacto_admin = p_contacto_admin,
+    telefono_admin = p_telefono_admin, ciudad = p_ciudad
+    where id = p_id;
+end;
+$$;
+
+
+create or replace procedure p_actualiza_producto(in p_id integer, in p_nombre varchar, in p_tipo_id integer,
+in p_tamaño varchar, in p_imagen varchar, in p_precio_base real, in p_precio_venta real, in p_proveedor_id integer)
+language plpgsql
+as
+$$
+begin
+    update productos  
+    set nombre = p_nombre, tipo_id = p_tipo_id, tamaño = p_tamaño, imagen = p_imagen,
+    precio_base = p_precio_base, precio_venta = p_precio_venta, proveedor_id = p_proveedor_id
+    where id = p_id;
+end;
+$$;
+
+create or replace procedure p_actualiza_supplier(in p_id integer, in p_nombre_empresa varchar, in p_responsable varchar,
+in p_correo varchar, in p_numero_registro int, in p_numero_contacto varchar, in p_direccion_empresa varchar,
+in p_ciudad varchar)
+language plpgsql
+as
+$$
+begin
+    update proveedores  
+    set nombre_empresa = p_nombre_empresa, responsable = p_responsable, correo = p_correo, numero_registro = p_numero_registro,
+    numero_contacto = p_numero_contacto, direccion_empresa = p_direccion_empresa, ciudad = p_ciudad
+    where id = p_id;
+end;
+$$;
+
 create or replace procedure p_elimina_location(in p_id integer)
 language plpgsql 
 as $$

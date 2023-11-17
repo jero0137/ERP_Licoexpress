@@ -1,6 +1,7 @@
 ﻿using ERP_LicoExpress_API.Interfaces;
 using ERP_LicoExpress_API.Models;
 using ERP_LicoExpress_API.Helpers;
+using ERP_LicoExpress_API.Repositories;
 
 namespace ERP_LicoExpress_API.Services
 {
@@ -99,6 +100,66 @@ namespace ERP_LicoExpress_API.Services
             }
 
             return (supplierExistente);
+
+        }
+
+
+        public async Task<Supplier> UpdateAsync(int supplier_id, Supplier unProveedor)
+        {
+
+
+            var supplierExistente = await _supplierRepository
+                .GetByIdAsync(supplier_id);
+
+            if (supplierExistente.Id == 0)
+                throw new AppValidationException($"No existe un proveedor registrado con el id {unProveedor.Id}");
+
+            if (supplier_id != supplierExistente.Id)
+                throw new AppValidationException($"Inconsistencia en el Id de la sede a actualizar. Verifica argumentos");
+
+
+            if (supplierExistente.Numero_registro == 0)
+                throw new AppValidationException("No se puede actualizar un numero de registro nulo");
+
+            if (string.IsNullOrEmpty(supplierExistente.Numero_contacto))
+                throw new AppValidationException("No se puede actualizar un numero de contacto nulo");
+
+            if (string.IsNullOrEmpty(supplierExistente.Correo))
+                throw new AppValidationException("No se puede actualizar un correo nulo");
+
+            if (string.IsNullOrEmpty(supplierExistente.Nombre_empresa))
+                throw new AppValidationException("No se puede actualizar un nombre nulo");
+
+            if (string.IsNullOrEmpty(supplierExistente.Ciudad))
+                throw new AppValidationException("No se puede actualizar una ciudad nula");
+
+            if (string.IsNullOrEmpty(supplierExistente.Direccion_empresa))
+                throw new AppValidationException("No se puede actualizar una direccion nula");
+
+            if (string.IsNullOrEmpty(supplierExistente.Responsable))
+                throw new AppValidationException("No se puede actualizar un responsable nulo");
+
+            //Validamos que haya al menos un cambio en las propiedades
+            if (unProveedor.Equals(supplierExistente))
+                throw new AppValidationException("No hay cambios en los atributos del producto. No se realiza actualización.");
+
+            try
+            {
+                bool resultadoAccion = await _supplierRepository
+                    .UpdateAsync(supplier_id, unProveedor);
+
+                if (!resultadoAccion)
+                    throw new AppValidationException("Operación ejecutada pero no generó cambios en la DB");
+
+                supplierExistente = await _supplierRepository
+                    .GetByIdAsync(unProveedor.Id!);
+            }
+            catch (DbOperationException error)
+            {
+                throw error;
+            }
+
+            return supplierExistente;
 
         }
     }
