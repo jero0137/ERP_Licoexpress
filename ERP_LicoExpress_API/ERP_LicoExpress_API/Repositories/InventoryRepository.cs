@@ -28,7 +28,7 @@ namespace ERP_LicoExpress_API.Repositories
             parametrosSentencia.Add("@inventory_id", id,
                                     DbType.Int32, ParameterDirection.Input);
 
-            string sentenciaSQL = "SELECT id, sede_id, producto_id, fecha_vencimiento, lote, stock  " +
+            string sentenciaSQL = "SELECT id, sede_id, producto_id, fecha_registro, lote, stock  " +
                         "FROM inventarios " +
                         "WHERE id=@inventory_id";
 
@@ -51,7 +51,7 @@ namespace ERP_LicoExpress_API.Repositories
             parametrosSentencia.Add("@location_id", id,
                                     DbType.Int32, ParameterDirection.Input);
 
-            string sentenciaSQL = "SELECT i.id, s.nombre sede, p.nombre producto, fecha_vencimiento, lote, stock  " +
+            string sentenciaSQL = "SELECT i.id, s.nombre sede, p.nombre producto, fecha_registro, lote, stock  " +
                         "FROM inventarios i " +
                         "JOIN sedes s ON s.id=i.sede_id "+
                         "JOIN productos p ON p.id=i.producto_id " +
@@ -76,7 +76,7 @@ namespace ERP_LicoExpress_API.Repositories
             parametrosSentencia.Add("@product_id", product_id,
                                     DbType.Int32, ParameterDirection.Input);
 
-            string sentenciaSQL = "SELECT i.id, s.nombre sede, p.nombre producto, fecha_vencimiento, lote, stock  " +
+            string sentenciaSQL = "SELECT i.id, s.nombre sede, p.nombre producto, fecha_registro, lote, stock  " +
                         "FROM inventarios i " +
                         "JOIN sedes s ON s.id=i.sede_id " +
                         "JOIN productos p ON p.id=i.producto_id " +
@@ -101,7 +101,7 @@ namespace ERP_LicoExpress_API.Repositories
                 {
                     p_sede = unInventory.Sede_id,
                     p_producto = unInventory.Producto_id,
-                    p_fecha_vencimiento = unInventory.Fecha_vencimiento,
+                    p_fecha_registro = unInventory.Fecha_registro,
                     p_lote = unInventory.Lote,
                     p_stock = unInventory.Stock
                 };
@@ -130,7 +130,7 @@ namespace ERP_LicoExpress_API.Repositories
             parametrosSentencia.Add("@product_id", producto_id,
                                     DbType.Int32, ParameterDirection.Input);
 
-            string sentenciaSQL = "SELECT i.id, s.nombre sede, p.nombre producto, fecha_vencimiento, lote, stock  " +
+            string sentenciaSQL = "SELECT i.id, s.nombre sede, p.nombre producto, fecha_registro, lote, stock  " +
                         "FROM inventarios i " +
                         "JOIN sedes s ON s.id=i.sede_id " +
                         "JOIN productos p ON p.id=i.producto_id " +
@@ -156,7 +156,7 @@ namespace ERP_LicoExpress_API.Repositories
                     p_sede_id = location_id,
                     p_id = inventory_id,
                     p_producto_id = unInventory.Producto_id,
-                    p_fecha_vencimiento = unInventory.Fecha_vencimiento,
+                    p_fecha_registro = unInventory.Fecha_registro,
                     p_lote = unInventory.Lote,
                     p_stock = unInventory.Stock
 

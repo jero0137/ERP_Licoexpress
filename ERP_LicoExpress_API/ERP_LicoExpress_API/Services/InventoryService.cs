@@ -61,7 +61,7 @@ namespace ERP_LicoExpress_API.Services
             if (unInventory.Producto_id == 0)
                 throw new AppValidationException("No se puede insertar un inventario sin un producto");
 
-            if (unInventory.Fecha_vencimiento.Length == 0)
+            if (unInventory.Fecha_registro.Length == 0)
                 throw new AppValidationException("No se puede insertar un inventario sin un una fecha de vencimiento");
 
             if (unInventory.Lote == 0)
@@ -110,7 +110,7 @@ namespace ERP_LicoExpress_API.Services
                 throw new AppValidationException($"Inconsistencia en el Id de la sede a actualizar. Verifica argumentos");
 
 
-            if (string.IsNullOrEmpty(inventoryExistente.Fecha_vencimiento))
+            if (string.IsNullOrEmpty(inventoryExistente.Fecha_registro))
                 throw new AppValidationException("No se puede actualizar una fecha de vencimiento nula");
 
             if (inventoryExistente.Lote == 0)

@@ -13,8 +13,8 @@ namespace ERP_LicoExpress_API.Models
         [JsonPropertyName("producto_id")]
         public int Producto_id { get; set; } = 0;
 
-        [JsonPropertyName("fecha_vencimiento")]
-        public string Fecha_vencimiento { get; set; } = string.Empty;
+        [JsonPropertyName("fecha_registro")]
+        public string Fecha_registro { get; set; } = string.Empty;
 
         [JsonPropertyName("lote")]
         public int Lote { get; set; } = 0;
@@ -32,7 +32,7 @@ namespace ERP_LicoExpress_API.Models
             return Id == otroInventario.Id
             && Sede_id == otroInventario.Sede_id
             && Producto_id == otroInventario.Producto_id
-            && Fecha_vencimiento.Equals(otroInventario.Fecha_vencimiento)
+            && Fecha_registro.Equals(otroInventario.Fecha_registro)
             && Lote == otroInventario.Lote
             && Stock == otroInventario.Stock;
 
@@ -46,7 +46,7 @@ namespace ERP_LicoExpress_API.Models
                 hash = hash * 5 + Id.GetHashCode();
                 hash = hash * 5 + Sede_id.GetHashCode();
                 hash = hash * 5 + Producto_id.GetHashCode();
-                hash = hash * 5 + (Fecha_vencimiento?.GetHashCode() ?? 0);
+                hash = hash * 5 + (Fecha_registro?.GetHashCode() ?? 0);
                 hash = hash * 5 + Lote.GetHashCode();
                 hash = hash * 5 + Stock.GetHashCode();
                 return hash;

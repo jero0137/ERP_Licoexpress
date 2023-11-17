@@ -56,7 +56,7 @@ create table inventarios (
 	id int4 not null generated always as identity,
 	sede_id int4 not null,
 	producto_id int4 not null,
-	fecha_vencimiento varchar not null,
+	fecha_registro varchar not null,
 	lote int not null,
 	stock int not null,
 	constraint inventarios_pk primary key (id)
@@ -66,7 +66,7 @@ alter table inventarios add constraint sedes_inventario_fk foreign key (sede_id)
 alter table inventarios add constraint producto_inventario_fk foreign key (producto_id) references productos(id);
 
 
-create table public.productosxproveedor (
+create table productosxproveedor (
 	id int4 not null generated always as identity,
 	producto_id int4 not null,
 	proveedor_id int4 not null,
@@ -144,13 +144,13 @@ end;
 $$;
 
 create or replace procedure p_actualiza_inventory(in p_id integer,in p_location_id integer, in p_sede_id integer, in p_producto_id integer,
-in p_fecha_vencimiento varchar, in p_lote integer, in p_stock integer)
+in p_fecha_registro varchar, in p_lote integer, in p_stock integer)
 language plpgsql
 as
 $$
 begin
     update inventarios as inv 
-    set sede_id = p_sede_id, producto_id = p_producto_id, fecha_vencimiento = p_fecha_vencimiento, lote = p_lote,
+    set sede_id = p_sede_id, producto_id = p_producto_id, fecha_registro = p_fecha_registro, lote = p_lote,
     stock = p_stock
    	from sedes s 
     where inv.id = p_id and s.id = p_location_id;
