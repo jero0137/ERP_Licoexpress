@@ -24,6 +24,14 @@ namespace ERP_LicoExpress_API.Controllers
             return Ok(losProductos);
         }
 
+        [HttpGet("tipos")]
+        public async Task<IActionResult> GetTiposAsync()
+        {
+            var losTipos = await _productService
+                .GetTiposAsync();
+
+            return Ok(losTipos);
+        }
 
 
         [HttpGet("{product_id:int}")]

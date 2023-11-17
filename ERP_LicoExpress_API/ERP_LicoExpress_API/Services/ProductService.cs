@@ -22,6 +22,11 @@ namespace ERP_LicoExpress_API.Services
                 .GetAllAsync();
         }
 
+        public async Task<IEnumerable<Tipo>> GetTiposAsync()
+        {
+            return await _productRepository
+                .GetTiposAsync();
+        }
 
         public async Task<Product> GetByIdAsync(int product_id)
         {

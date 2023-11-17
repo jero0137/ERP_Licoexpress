@@ -142,6 +142,29 @@ namespace ERP_LicoExpress_API.Repositories
             return resultadoInventories;
         }
 
+        public async Task<CantProductLocation> GetCantProductByLocationId(int location_id)
+        {
+            var conexion = contextoDB.CreateConnection();
+
+            CantProductLocation cant = new CantProductLocation();
+
+            DynamicParameters parametrosSentencia = new();
+            parametrosSentencia.Add("@location_id", location_id,
+                                    DbType.Int32, ParameterDirection.Input);
+
+            string sentenciaSQL = "SELECT id, sede, producto, cantidad " +
+                        "FROM cantidad_productosxsede cp " +
+                        "WHERE id=@location_id";
+
+            var resultado = await conexion.QueryAsync<CantProductLocation>(sentenciaSQL,
+                                parametrosSentencia);
+
+            if (resultado.Any())
+                cant = resultado.First();
+
+            return cant;
+        }
+
         public async Task<bool> UpdateAsync(int inventory_id, int location_id, Inventory unInventory)
         {
             bool resultadoAccion = false;

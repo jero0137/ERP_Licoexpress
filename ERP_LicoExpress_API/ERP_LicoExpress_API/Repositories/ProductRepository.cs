@@ -35,7 +35,18 @@ namespace ERP_LicoExpress_API.Repositories
             return resultadoProducts;
         }
 
+        public async Task<IEnumerable<Tipo>> GetTiposAsync()
+        {
+            var conexion = contextoDB.CreateConnection();
 
+            string sentenciaSQL = "SELECT id, descripcion " +
+                        "FROM tipos t " ;
+
+            var resultadoProducts = await conexion.QueryAsync<Tipo>(sentenciaSQL,
+                                        new DynamicParameters());
+
+            return resultadoProducts;
+        }
         public async Task<Product> GetByIdAsync(int id)
         {
             Product unProduct = new();
