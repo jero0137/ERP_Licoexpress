@@ -7,5 +7,7 @@ namespace ERP_LicoExpress_API.Interfaces
         public Task<IEnumerable<InventoryDetailed>> GetByLocationAsync(int id);
         public Task<IEnumerable<InventoryDetailed>> GetByLocationProductAsync(int location_id, int product_id);
         public Task<bool> CreateAsync(Inventory unInventory);
+        public Task<Inventory> GetByIdAsync(int id);
+        public Task<bool> UpdateAsync(int inventory_id, int location_id, Inventory unInventory);
     }
 }

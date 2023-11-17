@@ -17,6 +17,30 @@ namespace ERP_LicoExpress_API.Repositories
         }
 
 
+
+        public async Task<Inventory> GetByIdAsync(int id)
+        {
+            Inventory unInventory = new();
+
+            var conexion = contextoDB.CreateConnection();
+
+            DynamicParameters parametrosSentencia = new();
+            parametrosSentencia.Add("@inventory_id", id,
+                                    DbType.Int32, ParameterDirection.Input);
+
+            string sentenciaSQL = "SELECT id, sede_id, producto_id, fecha_vencimiento, lote, stock  " +
+                        "FROM inventarios " +
+                        "WHERE id=@inventory_id";
+
+            var resultado = await conexion.QueryAsync<Inventory>(sentenciaSQL,
+                                parametrosSentencia);
+
+            if (resultado.Any())
+                unInventory = resultado.First();
+
+            return unInventory;
+        }
+
         public async Task<IEnumerable<InventoryDetailed>> GetByLocationAsync(int id)
         {
             Inventory unInventory = new();
@@ -100,5 +124,40 @@ namespace ERP_LicoExpress_API.Repositories
 
 
 
+        public async Task<bool> UpdateAsync(int inventory_id, int location_id, Inventory unInventory)
+        {
+            bool resultadoAccion = false;
+
+            try
+            {
+                var conexion = contextoDB.CreateConnection();
+
+                string procedimiento = "p_actualiza_inventory";
+                var parametros = new
+                {
+                    p_sede_id = location_id,
+                    p_id = inventory_id,
+                    p_producto_id = unInventory.Producto_id,
+                    p_fecha_vencimiento = unInventory.Fecha_vencimiento,
+                    p_lote = unInventory.Lote,
+                    p_stock = unInventory.Stock
+
+                };
+
+                var cantidad_filas = await conexion.ExecuteAsync(
+                    procedimiento,
+                    parametros,
+                    commandType: CommandType.StoredProcedure);
+
+                if (cantidad_filas != 0)
+                    resultadoAccion = true;
+            }
+            catch (NpgsqlException error)
+            {
+                throw new DbOperationException(error.Message);
+            }
+
+            return resultadoAccion;
+        }
     }
 }

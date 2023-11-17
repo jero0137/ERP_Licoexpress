@@ -67,5 +67,26 @@ namespace ERP_LicoExpress_API.Controllers
             }
         }
 
+        [HttpPut("{location_id:int}/{inventory_id:int}")]
+        public async Task<IActionResult> UpdateAsync(int inventory_id, int location_id, Inventory unInventario)
+        {
+            try
+            {
+                var locationActualizada = await _inventoryService
+                    .UpdateAsync(inventory_id, location_id, unInventario);
+
+                return Ok(locationActualizada);
+
+            }
+            catch (AppValidationException error)
+            {
+                return BadRequest($"Error de validación: {error.Message}");
+            }
+            catch (DbOperationException error)
+            {
+                return BadRequest($"Error de operacion en DB: {error.Message}");
+            }
+        }
+
     }
 }
