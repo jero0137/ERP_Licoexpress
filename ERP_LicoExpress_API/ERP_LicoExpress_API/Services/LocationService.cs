@@ -101,5 +101,59 @@ namespace ERP_LicoExpress_API.Services
 
         }
 
+        public async Task<Location> UpdateAsync(int location_id, Location unaLocation)
+        {
+            
+
+            var locationExistente = await _locationRepository
+                .GetByIdAsync(location_id);
+
+            if (locationExistente.Id == 0)
+                throw new AppValidationException($"No existe un autobus registrado con el id {unaLocation.Id}");
+
+            if (location_id != locationExistente.Id)
+                throw new AppValidationException($"Inconsistencia en el Id de la sede a actualizar. Verifica argumentos");
+
+
+            if (string.IsNullOrEmpty(locationExistente.Contacto_admin))
+                throw new AppValidationException("No se puede actualizar un contacto nulo");
+
+            if (string.IsNullOrEmpty(locationExistente.Direccion))
+                throw new AppValidationException("No se puede actualizar una dirección nula");
+
+            if (string.IsNullOrEmpty(locationExistente.Nombre))
+                throw new AppValidationException("No se puede actualizar un nombre nulo");
+
+            if (string.IsNullOrEmpty(locationExistente.Ciudad))
+                throw new AppValidationException("No se puede actualizar una ciudad nula");
+
+            if (string.IsNullOrEmpty(locationExistente.Telefono_admin))
+                throw new AppValidationException("No se puede actualizar un telefono nulo");
+
+
+            //Validamos que haya al menos un cambio en las propiedades
+            if (unaLocation.Equals(locationExistente))
+                throw new AppValidationException("No hay cambios en los atributos de la sede. No se realiza actualización.");
+
+            try
+            {
+                bool resultadoAccion = await _locationRepository
+                    .UpdateAsync(location_id,unaLocation);
+
+                if (!resultadoAccion)
+                    throw new AppValidationException("Operación ejecutada pero no generó cambios en la DB");
+
+                locationExistente = await _locationRepository
+                    .GetByIdAsync(unaLocation.Id!);
+            }
+            catch (DbOperationException error)
+            {
+                throw error;
+            }
+
+            return locationExistente;
+
+        }
+
     }
 }

@@ -9,5 +9,6 @@ namespace ERP_LicoExpress_API.Interfaces
         public Task<Location> GetByNameAsync(string name);
         public Task<bool> DeleteAsync(Location unaLocation);
         public Task<bool> CreateAsync(Location unaLocation);
+        public Task<bool> UpdateAsync(int location_id, Location unaLocation);
     }
 }

@@ -142,5 +142,41 @@ namespace ERP_LicoExpress_API.Repositories
             return resultadoAccion;
         }
 
+        public async Task<bool> UpdateAsync(int location_id, Location unaLocation)
+        {
+            bool resultadoAccion = false;
+
+            try
+            {
+                var conexion = contextoDB.CreateConnection();
+
+                string procedimiento = "p_actualiza_location";
+                var parametros = new
+                {
+                    p_id = location_id,
+                    p_nombre = unaLocation.Nombre,
+                    p_direccion = unaLocation.Direccion,
+                    p_nombre_admin = unaLocation.Nombre_admin,
+                    p_contacto_admin = unaLocation.Contacto_admin,
+                    p_telefono_admin = unaLocation.Telefono_admin,
+                    p_ciudad = unaLocation.Ciudad,
+
+                };
+
+                var cantidad_filas = await conexion.ExecuteAsync(
+                    procedimiento,
+                    parametros,
+                    commandType: CommandType.StoredProcedure);
+
+                if (cantidad_filas != 0)
+                    resultadoAccion = true;
+            }
+            catch (NpgsqlException error)
+            {
+                throw new DbOperationException(error.Message);
+            }
+
+            return resultadoAccion;
+        }
     }
 }

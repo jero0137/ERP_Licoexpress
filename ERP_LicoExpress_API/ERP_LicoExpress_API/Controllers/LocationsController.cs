@@ -83,7 +83,30 @@ namespace ERP_LicoExpress_API.Controllers
             {
                 return BadRequest($"Error de operacion en DB: {error.Message}");
             }
+
+
         }
-        
+
+        [HttpPut("{location_id:int}")]
+        public async Task<IActionResult> UpdateAsync(int location_id, Location unaLocation)
+        {
+            try
+            {
+                var autobusActualizado = await _locationService
+                    .UpdateAsync(location_id, unaLocation);
+
+                return Ok(autobusActualizado);
+
+            }
+            catch (AppValidationException error)
+            {
+                return BadRequest($"Error de validación: {error.Message}");
+            }
+            catch (DbOperationException error)
+            {
+                return BadRequest($"Error de operacion en DB: {error.Message}");
+            }
+        }
+
     }
 }
