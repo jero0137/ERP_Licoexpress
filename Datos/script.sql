@@ -143,17 +143,19 @@ begin
 end;
 $$;
 
-
-create or replace procedure p_inserta_inventory(in p_sede integer, in p_producto integer,
+create or replace procedure p_actualiza_inventory(in p_id integer,in p_location_id integer, in p_sede_id integer, in p_producto_id integer,
 in p_fecha_vencimiento varchar, in p_lote integer, in p_stock integer)
-language plpgsql    
-as $$
+language plpgsql
+as
+$$
 begin
-    insert into inventarios(sede_id, producto_id, fecha_vencimiento, lote, stock)
-    values (p_sede, p_producto, p_fecha_vencimiento, p_lote, p_stock);
+    update inventarios as inv 
+    set sede_id = p_sede_id, producto_id = p_producto_id, fecha_vencimiento = p_fecha_vencimiento, lote = p_lote,
+    stock = p_stock
+   	from sedes s 
+    where inv.id = p_id and s.id = p_location_id;
 end;
 $$;
-
 
 create or replace procedure p_actualiza_location(in p_id integer, in p_nombre varchar, in p_direccion varchar,
 in p_nombre_admin varchar, in p_contacto_admin varchar, in p_telefono_admin varchar, in p_ciudad varchar)
